@@ -140,7 +140,7 @@ void main()
 	// 	printf("Erorr : Input/output Erorr \n");
 	// 	exit(1);
 	// }
-	data_0 = 0xfb;//data[0];
+	data_0 = 0x00;//data[0];
 	// Read 1 byte of data from address(0x3D)
 	// reg[0] = 0x3D;
 	// write(file, reg, 1);
@@ -189,10 +189,10 @@ void main()
 
 
 
-	// if(temp > 32767)
-	// {
-	// 	temp -= 65536;
-	// }
+	if(temp > 32767)
+	{
+		temp -= 65536;
+	}
 	float humidity = ((1.0 * H1) - (1.0 * H0)) * (1.0 * hum - 1.0 * H2) / (1.0 * H3 - 1.0 * H2) + (1.0 * H0);
 	float cTemp = ((T1 - T0) / 8.0) * (temp - T2) / (T3 - T2) + (T0 / 8.0);
 	float fTemp = (cTemp * 1.8 ) + 32;
