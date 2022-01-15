@@ -41,26 +41,26 @@ void main()
 	// Read Calibration values from the non-volatile memory of the device
 	// Humidity Calibration values
 	//Read 1 byte of data from address(0x30)
-	char reg[1] = {0x30};
+	unsigned char reg[1] = {0x30};
 	//write(file, reg, 1);
-	char data[1] = {0};
+	unsigned char data[1] = {0};
 	// if(read(file, data, 1) != 1)
 	// {
 	// 	printf("Erorr : Input/output Erorr \n");
 	// 	exit(1);
 	// }
-	char data_0 = 0x3c;//data[0];
+	unsigned char data_0 = 0x3c;//data[0];
 	// Read 1 byte of data from address(0x31)
 	// reg[0] = 0x31;
 	// write(file, reg, 1);
 	// read(file, data, 1);
-	char data_1 = 0x8b;//data[0];
+	unsigned char data_1 = 0x8b;//data[0];
 
-	__uint8_t H0 = data_0;
-	__uint8_t H1 = data_1;
+	__uint8_t H0 = data_0/2;
+	__uint8_t H1 = data_1/2;
 	 
-	 H0 = H0 / 2 ;
-	 H1 = H1 / 2 ;
+	//  H0 = H0 / 2 ;
+	//  H1 = H1 / 2 ;
 
 	printf("H0 = %d\n",H0);
 	printf("H1 = %d\n",H1);
@@ -81,7 +81,9 @@ void main()
 	// read(file, data, 1);
 	data_1 = 0xff;//data[0];
 
-	int H2 = (data_1 * 256) + data_0;
+	__int16_t H2 = (data_1 * 256) + data_0;
+
+	
 	
 	// //Read 1 byte of data from address(0x3A)
 	// reg[0] = 0x3A;
@@ -98,7 +100,7 @@ void main()
 	// read(file, data, 1);
 	data_1 = 0xd5;//data[0];
 
-	int H3 = (data_1 * 256) + data_0;
+	__int16_t H3 = (data_1 * 256) + data_0;
 	
 	// Temperature Calibration values
 	// Read 1 byte of data from address(0x32)
@@ -106,14 +108,14 @@ void main()
 	// write(file, reg, 1);
 	// read(file, data, 1);
 	
-	int T0 = 0xa7;//data[0];
+	__uint16_t T0 = 0xa7;//data[0];
 	
 	// // Read 1 byte of data from address(0x33)
 	// reg[0] = 0x33;
 	// write(file, reg, 1);
 	// read(file, data, 1);
 	
-	int T1 = 0x11;//data[0];
+	__uint16_t T1 = 0x11;//data[0];
 	
 	// Read 1 byte of data from address(0x35)
 	// reg[0] = 0x35;
@@ -122,12 +124,14 @@ void main()
 
 	data[0]=0xc4;
 	
-	int raw = data[0];
+	__uint16_t raw = data[0];
 	
 	// Convert the temperature Calibration values to 10-bits
 	T0 = ((raw & 0x03) * 256) + T0;
 	T1 = ((raw & 0x0C) * 64) + T1;
 	
+	printf("T0 = %d\n",T0);
+	printf("T1 = %d\n",T1);
 	//Read 1 byte of data from address(0x3C)
 	// reg[0] = 0x3C;
 	// write(file, reg, 1);
@@ -143,7 +147,9 @@ void main()
 	// read(file, data, 1);
 	data_1 = 0xff;//data[0];
 
-	int T2 = (data_1 * 256) + data_0;
+	__int16_t T2 = (data_1 * 256) + data_0;
+
+	printf("T2 = %d\n",T2);
 	
 	// //Read 1 byte of data from address(0x3E)
 	// reg[0] = 0x3E;
@@ -160,27 +166,33 @@ void main()
 	// read(file, data, 1);
 	data_1 = 0x02;//data[0];
 
-	int T3 = (data_1 * 256) + data_0;
+	__int16_t T3 = (data_1 * 256) + data_0;
+
+	printf("T3 = %d\n",T3);
+
 
 	//0x28
 	data_0 = 0x99;
 	//0x29
 	data_1 = 0xea;
 
-	int hum = (data_1 * 256) + data_0;
+	__int16_t hum = (data_1 * 256) + data_0;
 
 	//0x2a
 	data_0 = 0xfe;
 	//0x2b
 	data_1 = 0x00;
 
-	int temp = data_1 * 256 + data_0;
+	__int16_t temp = data_1 * 256 + data_0;
+	
+	printf("Temp = %d\n",temp);
 
 
-	if(temp > 32767)
-	{
-		temp -= 65536;
-	}
+
+	// if(temp > 32767)
+	// {
+	// 	temp -= 65536;
+	// }
 	float humidity = ((1.0 * H1) - (1.0 * H0)) * (1.0 * hum - 1.0 * H2) / (1.0 * H3 - 1.0 * H2) + (1.0 * H0);
 	float cTemp = ((T1 - T0) / 8.0) * (temp - T2) / (T3 - T2) + (T0 / 8.0);
 	float fTemp = (cTemp * 1.8 ) + 32;
