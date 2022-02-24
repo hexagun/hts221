@@ -30,13 +30,13 @@ void main()
 	config[0] = 0x10;
 	config[1] = 0x1B;
 	write(file, config, 2);
-	sleep(1);
+	//sleep(1);
 	// Select control register1(0x20)
 	// Power on, block data update, data rate o/p = 1 Hz(0x85)
 	config[0] = 0x20;
 	config[1] = 0x85;
 	write(file, config, 2);
-	sleep(1);
+	//sleep(1);
 
 	// Read Calibration values from the non-volatile memory of the device
 	// Humidity Calibration values
@@ -199,6 +199,7 @@ void main()
 	read(file, data, 1);
 	data_1 = data[0];
 
+	close(file);
 	__int16_t temp = (data_1 * 256) + data_0;
 
 
