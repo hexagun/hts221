@@ -213,8 +213,8 @@ void main()
     float fTemp = (cTemp * 1.8 ) + 32;
     
     // Output data to screen
-    printf("Relative humidity : %.2f Humidity \n", humidity);
-    printf("Temperature in Celsius : %.2f C \n", cTemp);
+    printf("Relative humidity : %.2f % \n", humidity);
+	printf("Temperature in Celsius : %.2f C \n", cTemp);
     printf("Temperature in Fahrenheit : %.2f F \n", fTemp);
 	
 }
