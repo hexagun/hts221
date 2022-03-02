@@ -209,6 +209,10 @@ void main()
     }
     
     float humidity = ((1.0 * H1) - (1.0 * H0)) * (1.0 * hum - 1.0 * H2) / (1.0 * H3 - 1.0 * H2) + (1.0 * H0);
+	if( humidity > 100.0)
+	{
+		humidity = 100.00;
+	}
     float cTemp = ((T1 - T0) / 8.0) * (temp - T2) / (T3 - T2) + (T0 / 8.0);
     float fTemp = (cTemp * 1.8 ) + 32;
     
