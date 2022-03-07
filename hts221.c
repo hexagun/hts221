@@ -193,7 +193,7 @@ void main()
 	}
 	data_0 = data[0];
 
-	// Read 1 byte of data from address(0x3F)
+	// Read 1 byte of data from address(0x2B)
 	reg[0] = 0x2b;
 	write(file, reg, 1);
 	read(file, data, 1);
