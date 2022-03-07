@@ -154,11 +154,11 @@ int main()
         
         //Read 2 byte of data from address(0x36 and 0x37)
         reg = 0x36 | 0x80 ;// | 0x80 auto increment reg value - datasheet sect : 5.5.1
-        __uint16_t H2 =  i2c_read_2Byte(slave_address, reg);
+        __int16_t H2 =  i2c_read_2Byte(slave_address, reg);
 
         //Read 2 byte of data from address(0x3a and 0x3b)
         reg = 0x3a | 0x80 ;// | 0x80 auto increment reg value - datasheet sect : 5.5.1
-        __uint16_t H3 =  i2c_read_2Byte(slave_address, reg);
+        __int16_t H3 =  i2c_read_2Byte(slave_address, reg);
 
         //Read 1 byte of data from address(0x32)
         reg = 0x32;
@@ -178,19 +178,19 @@ int main()
 
         //Read 2 byte of data from address(0x3C and 0x3D)
         reg = 0x3C | 0x80 ;// | 0x80 auto increment reg value - datasheet sect : 5.5.1
-        __uint16_t T2 =  i2c_read_2Byte(slave_address, reg);
+        __int16_t T2 =  i2c_read_2Byte(slave_address, reg);
 
         //Read 2 byte of data from address(0x3E and 0x3F)
         reg = 0x3E | 0x80 ;// | 0x80 auto increment reg value - datasheet sect : 5.5.1
-        __uint16_t T3 =  i2c_read_2Byte(slave_address, reg);
+        __int16_t T3 =  i2c_read_2Byte(slave_address, reg);
 
         //Read 2 byte of data from address(0x28 and 0x29)
         reg = 0x28 | 0x80 ;// | 0x80 auto increment reg value - datasheet sect : 5.5.1
-        __uint16_t hum =  i2c_read_2Byte(slave_address, reg);
+        __int16_t hum =  i2c_read_2Byte(slave_address, reg);
 
         //Read 2 byte of data from address(0x2A and 0x2B)
         reg = 0x2A | 0x80 ;// | 0x80 auto increment reg value - datasheet sect : 5.5.1
-        __uint16_t temp =  i2c_read_2Byte(slave_address, reg);
+        __int16_t temp =  i2c_read_2Byte(slave_address, reg);
         
         if(temp > 32767)
         {
