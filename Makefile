@@ -1,4 +1,7 @@
-hts221: main.o hts221.o
+hts221_x86: main.o hts221.o
+	gcc main.o hts221.o -o hts221
+
+hts221_arm: main.o hts221.o
 	gcc main.o hts221.o -o hts221
 
 main.o: main.c
