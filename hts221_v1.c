@@ -56,6 +56,20 @@ int i2c_write(unsigned char slave_addr, unsigned char reg, unsigned char byte )
     return 0;
 }
 
+void EnableHeater(void)
+{
+        //Read 1 byte of data from address(0x21)
+        reg = 0x21;
+        __uint8_t HeaterRegister = i2c_read_1Byte(slave_address, reg);
+        HeaterRegister |= 0x02 ;
+}
+void DisableHeater(void)
+{
+        //Read 1 byte of data from address(0x21)
+        reg = 0x21;
+        __uint8_t HeaterRegister = i2c_read_1Byte(slave_address, reg);
+        HeaterRegister &= ~(0x02);
+}
 
 // Read the given I2C slave device's register and return the read value in `*result`:
 __uint16_t i2c_read_2Byte(unsigned char slave_addr, unsigned char reg) 
@@ -209,6 +223,13 @@ int main()
         printf("Temperature in Celsius : %.2f C \n", cTemp);
         printf("Temperature in Fahrenheit : %.2f F \n", fTemp);
 
+        if( humidity > 100.0)
+	{
+		EnableHeater();
+                sleep(5)
+                DisableHeater();
+                sleep(1);
+	}
 
         i2c_close();
         return 0;
