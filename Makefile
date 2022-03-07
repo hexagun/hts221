@@ -1,8 +1,8 @@
 hts221_x86: main.o hts221.o
-	gcc main.o hts221.o -o hts221
+	gcc main.o hts221.o -o hts221_x86
 
 hts221_arm: main.o hts221.o
-	gcc main.o hts221.o -o hts221
+	aarch64-linux-gnu-gcc main.o hts221.o -o hts221_arm
 
 main.o: main.c
 	gcc -c main.c
