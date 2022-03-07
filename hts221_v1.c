@@ -59,14 +59,14 @@ int i2c_write(unsigned char slave_addr, unsigned char reg, unsigned char byte )
 void EnableHeater(void)
 {
         //Read 1 byte of data from address(0x21)
-        reg = 0x21;
+        unsigned char reg = 0x21;
         __uint8_t HeaterRegister = i2c_read_1Byte(slave_address, reg);
         HeaterRegister |= 0x02 ;
 }
 void DisableHeater(void)
 {
         //Read 1 byte of data from address(0x21)
-        reg = 0x21;
+        unsigned char reg = 0x21;
         __uint8_t HeaterRegister = i2c_read_1Byte(slave_address, reg);
         HeaterRegister &= ~(0x02);
 }
@@ -226,7 +226,7 @@ int main()
         if( humidity > 100.0)
 	{
 		EnableHeater();
-                sleep(5)
+                sleep(5);
                 DisableHeater();
                 sleep(1);
 	}
