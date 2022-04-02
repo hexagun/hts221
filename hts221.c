@@ -80,7 +80,7 @@ __uint8_t i2c_read_1Byte(unsigned char reg){
         return reg_value;
 }
 
-void i2c_init(const char* busName){
+int i2c_init(const char* busName){
     if (!(fd_i2c = open(busName, O_RDWR))){
         return errno;
     }

@@ -58,7 +58,7 @@ int enable_heater();
 
 int disable_heater();
 
-void i2c_init(const char*);
+int i2c_init(const char*);
 
 void i2c_close(void);
 
