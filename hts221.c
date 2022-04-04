@@ -148,21 +148,19 @@ int i2c_write(unsigned char reg, unsigned char byte ){
 }
 
 int enable_heater(){
-        //Read 1 byte of data from address(0x21)
-        unsigned char reg = 0x21;
-        __uint8_t reg_value = i2c_read_1Byte(reg);
-        reg_value |= 0x02 ;
-        i2c_write(reg, reg_value );
-        return 0;
+    // Read 1 byte of data from address(0x21)
+    __uint8_t reg_value = i2c_read_1Byte(HTS221_CTRL_REG2_ADDR);
+    reg_value |= 0x02 ;
+    i2c_write(HTS221_CTRL_REG2_ADDR, reg_value );
+    return 0;
 }
 
 int disable_heater(){
-        //Read 1 byte of data from address(0x21)
-        unsigned char reg = 0x21;
-        __uint8_t reg_value = i2c_read_1Byte(reg);
-        reg_value &= ~(0x02);
-        i2c_write(reg, reg_value );
-        return 0;
+    // Read 1 byte of data from address(0x21)
+    __uint8_t reg_value = i2c_read_1Byte(HTS221_CTRL_REG2_ADDR);
+    reg_value &= ~(0x02);
+    i2c_write(HTS221_CTRL_REG2_ADDR, reg_value );
+    return 0;
 }
 
 float hts221_GetTemp(){
